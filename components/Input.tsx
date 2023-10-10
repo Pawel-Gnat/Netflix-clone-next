@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({ id, onChange, value, label, type }) => {
 				placeholder=" "
 			/>
 			<label
-				className="text-md transform-translate-y-3 absolute left-6 top-4 z-10 origin-[0] scale-75 text-zinc-400 duration-150 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus-visible:-translate-y-3 peer-focus-visible:scale-75"
+				className="text-md transform -translate-y-3 absolute left-6 top-4 z-10 origin-[0] scale-75 text-zinc-400 duration-150 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus-visible:-translate-y-3 peer-focus-visible:scale-75"
 				htmlFor={id}
 			>
 				{label}
