@@ -1,12 +1,10 @@
 import Input from '@/components/Input'
 import axios from 'axios'
 import Image from 'next/image'
-import { ChangeEvent, useState, useCallback } from 'react'
+import { ChangeEvent, useState, useCallback, FormEvent } from 'react'
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/router'
 
 const Auth = () => {
-	const router = useRouter()
 	const [email, setEmail] = useState('')
 	const [name, setName] = useState('')
 	const [password, setPassword] = useState('')
@@ -22,15 +20,12 @@ const Auth = () => {
 			await signIn('credentials', {
 				email,
 				password,
-				redirect: false,
-				callbackUrl: '/'
+				callbackUrl: '/profiles'
 			})
-
-			router.push('/')
 		} catch (error) {
 			console.log(error)
 		}
-	}, [email, password, router])
+	}, [email, password])
 
 	const register = useCallback(async () => {
 		try {
@@ -46,6 +41,11 @@ const Auth = () => {
 		}
 	}, [email, name, password, login])
 
+	const handleForm = (e: FormEvent) => {
+		e.preventDefault()
+		variant === 'login' ? login() : register()
+	}
+
 	return (
 		<div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-cover bg-fixed bg-center bg-no-repeat">
 			<div className="h-full w-full bg-black lg:bg-opacity-50">
@@ -54,40 +54,38 @@ const Auth = () => {
 				</nav>
 				<div className="flex justify-center">
 					<div className="mt-2 w-full self-center rounded-md bg-black/70 p-16 lg:w-2/5 lg:max-w-md">
-						<h2 className="mb-8 text-4xl font-semibold text-white">
+						<h1 className="mb-8 text-4xl font-semibold text-white">
 							{variant === 'login' ? 'Sign in' : 'Register'}
-						</h2>
-						<div className="flex flex-col gap-4">
-							{variant === 'register' && (
+						</h1>
+						<form onSubmit={handleForm}>
+							<div className="flex flex-col gap-4">
+								{variant === 'register' && (
+									<Input
+										label="Username"
+										onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+										id="name"
+										value={name}
+									/>
+								)}
 								<Input
-									label="Username"
-									onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-									id="name"
-									value={name}
+									label="Email"
+									onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+									id="email"
+									type="email"
+									value={email}
 								/>
-							)}
-
-							<Input
-								label="Email"
-								onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-								id="email"
-								type="email"
-								value={email}
-							/>
-							<Input
-								label="Password"
-								onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-								id="password"
-								type="password"
-								value={password}
-							/>
-						</div>
-						<button
-							onClick={variant === 'login' ? login : register}
-							className="mt-10 w-full rounded-md bg-red-600 py-3 text-white transition-colors hover:bg-red-700"
-						>
-							{variant === 'login' ? 'Sign in' : 'Sign up'}
-						</button>
+								<Input
+									label="Password"
+									onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+									id="password"
+									type="password"
+									value={password}
+								/>
+							</div>
+							<button className="mt-10 w-full rounded-md bg-red-600 py-3 text-white transition-colors hover:bg-red-700">
+								{variant === 'login' ? 'Sign in' : 'Sign up'}
+							</button>
+						</form>
 						<p className="mt-12 text-neutral-500">
 							{variant === 'login' ? 'First time using Netflix?' : 'Already have an account?'}
 							<button
