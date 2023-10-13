@@ -26,6 +26,7 @@ export default function Home() {
 	return (
 		<>
 			<Navbar />
+
 			{/* <h1>Netflix Clone</h1> */}
 			{/* <p>Logged in as : {user?.name}</p> */}
 			{/* <button onClick={() => signOut()}>Logout</button> */}
