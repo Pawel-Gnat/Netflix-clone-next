@@ -51,9 +51,9 @@ const Navbar = () => {
 					aria-hidden="true"
 				/>
 				<ul className="ml-8 hidden flex-row gap-7 lg:flex">
-					{routes.map((route, index) => {
-						return <NavbarItem key={index} label={route} />
-					})}
+					{routes.map((route, index) => (
+						<NavbarItem key={index} label={route} />
+					))}
 				</ul>
 				<div
 					onClick={toggleMobileMenu}
