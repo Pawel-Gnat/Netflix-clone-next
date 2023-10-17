@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash'
 import React from 'react'
 import { BsFillPlayFill } from 'react-icons/bs'
+import FavoriteButton from './FavoriteButton'
 
 interface MovieCardProps {
 	data: Record<string, any>
@@ -32,15 +33,16 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 						>
 							<BsFillPlayFill />
 						</button>
+						<FavoriteButton movieId={data?.id} />
 					</div>
 					<p className="mt-4 font-semibold text-green-400">
 						New <span className="text-white">2023</span>
 					</p>
 					<div className="mt-4 flex flex-row items-center gap-2">
-						<p className="text-[10px] text-white lg:text-sm ">{data.duration}</p>
+						<p className="text-[10px] text-white lg:text-sm">{data.duration}</p>
 					</div>
 					<div className="mt-4 flex flex-row items-center gap-2">
-						<p className="text-[10px] text-white lg:text-sm ">{data.genre}</p>
+						<p className="text-[10px] text-white lg:text-sm">{data.genre}</p>
 					</div>
 				</div>
 			</div>
