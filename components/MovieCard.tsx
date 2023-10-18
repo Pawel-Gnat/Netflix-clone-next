@@ -2,12 +2,15 @@ import { isEmpty } from 'lodash'
 import React from 'react'
 import { BsFillPlayFill } from 'react-icons/bs'
 import FavoriteButton from './FavoriteButton'
+import { useRouter } from 'next/router'
 
 interface MovieCardProps {
 	data: Record<string, any>
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+	const router = useRouter()
+
 	if (isEmpty(data)) {
 		return null
 	}
@@ -29,7 +32,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
 					<div className="fle-row flex items-center gap-3">
 						<button
 							className="lh:h-10 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-white transition-colors hover:bg-neutral-400 lg:w-10"
-							onClick={() => {}}
+							onClick={() => router.push(`/watch/${data?.id}`)}
 						>
 							<BsFillPlayFill />
 						</button>
