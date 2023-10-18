@@ -1,12 +1,15 @@
 import { signOut } from 'next-auth/react'
 import React from 'react'
 import Image from 'next/image'
+import useCurrentUser from '@/hooks/useCurrentUser'
 
 interface AccountMenuProps {
 	visible?: boolean
 }
 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
+	const { data } = useCurrentUser()
+
 	if (!visible) {
 		return null
 	}
@@ -22,7 +25,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
 						height={40}
 						alt="Profile"
 					/>
-					<p className="text-sm text-white group-hover/item:underline">Username</p>
+					<p className="text-sm text-white group-hover/item:underline">{data?.name}</p>
 				</div>
 				<hr className="my-4 h-px border-0 bg-gray-600" />
 				<button
