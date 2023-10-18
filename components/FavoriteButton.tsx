@@ -1,9 +1,9 @@
-import useBillboard from '@/hook/useBillboard'
+import useBillboard from '@/hooks/useBillboard'
 import React, { useCallback, useMemo } from 'react'
 import { AiOutlinePlus, AiOutlineCheck } from 'react-icons/ai'
 import axios from 'axios'
-import useFavorites from '@/hook/useFavorite'
-import useCurrentUser from '@/hook/useCurrentUser'
+import useFavorites from '@/hooks/useFavorite'
+import useCurrentUser from '@/hooks/useCurrentUser'
 
 interface FavoriteButtonProps {
 	movieId: string
